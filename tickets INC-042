@@ -1,0 +1,52 @@
+# Ticket INC-042 — Erreur lors de la création d’une commande
+
+## Contexte
+Projet : OrionPay — application fictive du TP ATOS.
+Environnement : recette.
+Stack : Java 17, Spring Boot 3, PostgreSQL 16.
+Module concerné : OrderService.
+
+Toutes les informations de ce ticket sont fictives.
+Aucune donnée client réelle ni aucun secret n’est utilisé.
+
+## Description du problème
+Lorsqu’un utilisateur crée une commande sans aucun article,
+l’application retourne une erreur HTTP 500.
+
+Le comportement attendu est une réponse HTTP 400,
+avec un message indiquant que la commande doit contenir
+au moins un article.
+
+## Étapes de reproduction
+1. Ouvrir l’environnement de recette.
+2. Envoyer une requête POST /v1/orders.
+3. Utiliser le corps JSON suivant :
+
+{
+  "customerReference": "CLIENT_FICTIF_001",
+  "items": []
+}
+
+4. Observer la réponse.
+
+## Résultat observé
+HTTP 500 — Erreur interne.
+
+## Résultat attendu
+HTTP 400 — Requête invalide.
+
+Message attendu :
+"La commande doit contenir au moins un article."
+
+## Informations pour la qualification du ticket
+- Solution documentée dans la base de connaissances : oui.
+- Référence de la solution : KB-ORDER-004.
+- Priorité : normale.
+- Incident critique : non.
+- Sujet de sécurité : non.
+- Dernière réouverture : il y a 10 jours.
+- Analyse humaine explicitement demandée par le client : non.
+
+## Demande au support
+Déterminer si le ticket peut être clôturé automatiquement
+ou s’il doit être escaladé pour une analyse humaine.
