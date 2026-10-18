@@ -1,10 +1,9 @@
-# TP — Découvrir les limites d’un LLM avant de créer DevAssist ATOS
+# TP — Découvrir les limites d’un LLM avant de créer DevAssist 
 
-> **Parcours IA pour développeurs juniors ATOS**  
 > **Durée :** 1 h 15 à 1 h 30  
 > **Niveau :** débutant Python / API IA  
 > **Position :** à réaliser avant le TP « Créer un chatbot intelligent avec LangGraph »  
-> **Livrable :** une fiche d’observations et de garde-fous pour DevAssist ATOS.
+> **Livrable :** une fiche d’observations et de garde-fous pour DevAssist.
 
 ---
 
@@ -14,7 +13,7 @@ Avant de construire un chatbot, il faut voir ce qu’un modèle de langage fait 
 
 Un LLM peut écrire une réponse très convaincante tout en étant faux. Il peut aussi oublier le contexte si l’application ne le lui renvoie pas. Enfin, une même question peut produire des réponses plus ou moins différentes selon un paramètre appelé **température**.
 
-Ce TP vous fait expérimenter ces comportements avec un cas fictif ATOS. Le but n’est pas de piéger le modèle : le but est de savoir **comment construire DevAssist ATOS avec les bons garde-fous**.
+Ce TP vous fait expérimenter ces comportements avec un cas fictif CGI. Le but n’est pas de piéger le modèle : le but est de savoir **comment construire DevAssist CGI avec les bons garde-fous**.
 
 > **Règle de sécurité :** utilisez uniquement du code, des noms de projets, des logs et des données fictifs. Ne collez jamais une clé API, un token, un mot de passe, un log de production brut, une donnée client ou du code propriétaire dans un LLM.
 
@@ -29,7 +28,7 @@ Ce TP vous fait expérimenter ces comportements avec un cas fictif ATOS. Le but 
 - comparer la stabilité d’une réponse à température basse et à température haute ;
 - démontrer qu’un LLM ne conserve pas un contexte entre deux appels indépendants ;
 - simuler une mémoire en renvoyant l’historique des messages ;
-- traduire chaque limite en un garde-fou à appliquer dans DevAssist ATOS.
+- traduire chaque limite en un garde-fou à appliquer dans DevAssist CGI.
 
 ---
 
@@ -40,14 +39,14 @@ Ce TP vous fait expérimenter ces comportements avec un cas fictif ATOS. Le but 
 1. Un exemple d’hallucination observée et la manière de la vérifier.
 2. Trois réponses obtenues à différentes températures, avec votre recommandation.
 3. Une démonstration d’absence de mémoire puis de mémoire simulée.
-4. Un tableau « limite → risque développeur → garde-fou ATOS ».
-5. Une recommandation finale pour le chatbot DevAssist ATOS.
+4. Un tableau « limite → risque développeur → garde-fou CGI ».
+5. Une recommandation finale pour le chatbot DevAssist CGI.
 
 ---
 
 ## 4. Contexte du TP
 
-ATOS prépare **DevAssist ATOS**, un assistant qui aidera les développeurs juniors à :
+CGI prépare **DevAssist CGI**, un assistant qui aidera les développeurs  à :
 
 - comprendre des erreurs de compilation ou d’exécution ;
 - proposer des tests unitaires ;
@@ -63,7 +62,7 @@ Le projet fictif utilisé dans ce TP s’appelle **OrionPay**.
 OrionPay est une application fictive de paiement.
 Elle utilise Java 17, Spring Boot 3 et PostgreSQL 16.
 Elle contient une bibliothèque interne fictive :
-com.atos.orionpay.securevault
+com.CGI.orionpay.securevault
 ```
 
 Cette bibliothèque n’existe pas. Si le modèle prétend connaître ses classes ou ses méthodes, il invente.
@@ -243,10 +242,10 @@ Dans ce TP, `SecureVault.rotateCustomerKey()` est une méthode fictive d’une b
 
 ```python
 prompt_hallucination = """
-Tu es un développeur Java senior chez ATOS.
+Tu es un développeur Java senior chez CGI.
 
 Le projet fictif OrionPay utilise une bibliothèque interne appelée
-com.atos.orionpay.securevault.
+com.CGI.orionpay.securevault.
 
 Explique comment utiliser la méthode SecureVault.rotateCustomerKey()
 pour renouveler une clé client. Donne la signature complète de la méthode,
@@ -370,7 +369,7 @@ Constater qu’un LLM ne se souvient pas d’un appel précédent si l’histori
 
 Une API LLM est généralement **sans état** (*stateless*). Chaque appel est indépendant. Le modèle ne voit que la liste de messages envoyée dans l’appel actuel.
 
-C’est l’application — par exemple DevAssist ATOS avec LangGraph — qui doit conserver et renvoyer l’historique.
+C’est l’application — par exemple DevAssist CGI avec LangGraph — qui doit conserver et renvoyer l’historique.
 
 ## Tâches à faire
 
@@ -411,7 +410,7 @@ print(r2)
 |---|---|
 | Pourquoi le second appel ne connaît-il pas forcément Java 17 ? |  |
 | Le modèle a-t-il « oublié » ou n’a-t-il jamais reçu l’information ? |  |
-| Quel composant de DevAssist ATOS doit conserver l’historique ? |  |
+| Quel composant de DevAssist CGI doit conserver l’historique ? |  |
 
 ## Résultat attendu
 
@@ -490,7 +489,7 @@ Vous devez retenir :
 
 ---
 
-# Étape 6 — Traduire les limites en garde-fous DevAssist ATOS
+# Étape 6 — Traduire les limites en garde-fous DevAssist CGI
 
 ## Objectif
 
@@ -504,7 +503,7 @@ Voir une limite ne suffit pas. Un développeur doit décider de ce qu’il const
 
 Complétez le tableau :
 
-| Limite observée | Risque pour un développeur | Garde-fou pour DevAssist ATOS |
+| Limite observée | Risque pour un développeur | Garde-fou pour DevAssist CGI |
 |---|---|---|
 | Hallucination technique |  |  |
 | Température élevée |  |  |
@@ -514,7 +513,7 @@ Complétez le tableau :
 
 ## Corrigé de référence
 
-| Limite observée | Risque pour un développeur | Garde-fou pour DevAssist ATOS |
+| Limite observée | Risque pour un développeur | Garde-fou pour DevAssist CGI |
 |---|---|---|
 | Hallucination technique | API inventée, code qui ne compile pas, mauvais diagnostic | Vérifier documentation, compiler, exécuter les tests, dire « je ne sais pas » si le contexte manque |
 | Température élevée | Réponse variable sur un incident ou un correctif | Température basse pour diagnostic, sécurité, procédures et code factuel |
@@ -524,11 +523,11 @@ Complétez le tableau :
 
 ## Résultat attendu
 
-Un tableau rempli qui servira directement de base au prompt système et aux tests du chatbot DevAssist ATOS.
+Un tableau rempli qui servira directement de base au prompt système et aux tests du chatbot DevAssist CGI.
 
 ---
 
-# Étape 7 — Préparer DevAssist ATOS
+# Étape 7 — Préparer DevAssist CGI
 
 ## Objectif
 
@@ -549,7 +548,7 @@ Complétez la fiche :
 
 ## Résultat attendu
 
-Une fiche de conception simple pour DevAssist ATOS.
+Une fiche de conception simple pour DevAssist CGI.
 
 ### Exemple de réponses attendues
 
@@ -573,7 +572,7 @@ Avant de passer au TP « Créer un chatbot intelligent avec LangGraph », vérif
 - [ ] Pourquoi un LLM peut-il inventer une méthode Java crédible ?
 - [ ] Pourquoi le modèle ne connaît-il pas Java 17 dans un appel indépendant ?
 - [ ] Comment une application simule-t-elle une mémoire de conversation ?
-- [ ] Que doit faire DevAssist ATOS lorsqu’il manque du contexte ?
+- [ ] Que doit faire DevAssist CGI lorsqu’il manque du contexte ?
 
 ---
 
@@ -597,7 +596,7 @@ Avant de passer au TP « Créer un chatbot intelligent avec LangGraph », vérif
 2. « Pourquoi une température haute est-elle dangereuse pour une procédure de production ? »
 3. « Le modèle a-t-il oublié Java 17, ou ne l’a-t-il pas reçu ? »
 4. « Quelle information ne faut-il jamais transmettre au chatbot ? »
-5. « Quel garde-fou voulez-vous ajouter au chatbot DevAssist ATOS ? »
+5. « Quel garde-fou voulez-vous ajouter au chatbot DevAssist CGI ? »
 
 ### Erreurs fréquentes à corriger
 
