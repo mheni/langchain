@@ -1,6 +1,6 @@
-# TP — Construire un assistant RAG pour DevAssist ATOS
+# TP — Construire un assistant RAG pour DevAssist
 
-> **Parcours IA pour développeurs juniors ATOS**  
+> **Parcours IA pour développeurs CGI**  
 > **Durée :** 1 h 45 à 2 h 15  
 > **Niveau :** Python débutant, LLM et prompt engineering fondamentaux  
 > **Prérequis :** TP Fondamentaux LLM + TP Prompt Engineering  
@@ -14,7 +14,7 @@ Dans le TP sur les fondamentaux, vous avez vu qu’un LLM peut inventer une rép
 
 Dans le TP sur le prompt engineering, vous avez appris à mieux formuler les demandes. Mais un prompt bien écrit ne peut pas donner au modèle une connaissance absente de son entraînement.
 
-Pour aider un développeur sur un projet réel, DevAssist ATOS doit pouvoir s’appuyer sur une documentation contrôlée : README, guides de contribution, conventions de code, procédures d’incident, API internes validées ou documentation technique publique.
+Pour aider un développeur sur un projet réel, DevAssist CGI doit pouvoir s’appuyer sur une documentation contrôlée : README, guides de contribution, conventions de code, procédures d’incident, API internes validées ou documentation technique publique.
 
 C’est le rôle d’un système **RAG** — *Retrieval Augmented Generation* :
 
@@ -58,17 +58,17 @@ C’est le rôle d’un système **RAG** — *Retrieval Augmented Generation* :
 
 ---
 
-## 4. Contexte métier : DevAssist ATOS et OrionPay
+## 4. Contexte métier : DevAssist CGI et OrionPay
 
-ATOS maintient l’application fictive **OrionPay** :
+CGI maintient l’application fictive **OrionPay** :
 
 - Java 17 ;
 - Spring Boot 3 ;
 - PostgreSQL 16 ;
 - API de paiement et de gestion de commandes ;
-- équipe de développeurs juniors accompagnée par des seniors.
+- équipe de développeurs.
 
-DevAssist ATOS doit aider les juniors à retrouver :
+DevAssist CGI doit aider les  à retrouver :
 
 - les conventions de code ;
 - les commandes de lancement et de test ;
@@ -128,7 +128,7 @@ pip install -U \
   "sentence-transformers>=5.2.0"
 ```
 
-> Les modèles d’embeddings sont exécutés localement avec HuggingFace dans ce TP. Le LLM sert à générer la réponse. Dans une architecture entreprise, les choix de modèles, de stockage et de région doivent respecter les règles ATOS et celles du client.
+> Les modèles d’embeddings sont exécutés localement avec HuggingFace dans ce TP. Le LLM sert à générer la réponse. Dans une architecture entreprise, les choix de modèles, de stockage et de région doivent respecter les règles CGI et celles du client.
 
 ### Configuration des secrets
 
@@ -153,7 +153,7 @@ faiss_index/
 
 ## Objectif
 
-Créer une documentation fictive, contrôlée et sans donnée sensible, qui servira de source de vérité à DevAssist ATOS.
+Créer une documentation fictive, contrôlée et sans donnée sensible, qui servira de source de vérité à DevAssist CGI.
 
 ## Explication simple
 
@@ -398,13 +398,9 @@ Créer un assistant qui répond uniquement à partir des documents retrouvés.
 ## Explication simple
 
 Le retriever cherche les documents utiles. Ensuite, leurs contenus sont ajoutés au prompt du LLM.
-
 La consigne la plus importante est le comportement de repli :
-
 > « Si l’information n’est pas dans les sources, dis que tu ne la possèdes pas. N’invente rien. »
-
 Sans cette instruction, le modèle peut recommencer à compléter avec ses connaissances générales, même si vous avez ajouté un RAG.
-
 ## Tâches à faire
 
 ```python
@@ -422,7 +418,7 @@ llm = ChatGroq(
 
 prompt = ChatPromptTemplate.from_template(
     """
-Tu es DevAssist ATOS, un assistant pédagogique pour développeurs juniors.
+Tu es DevAssist CGI, un assistant pédagogique pour développeurs .
 
 Réponds uniquement à partir du contexte OrionPay fourni ci-dessous.
 
@@ -547,7 +543,7 @@ Le chatbot doit répondre exactement ou très près de :
 Je ne dispose pas de cette information dans la documentation OrionPay fournie.
 ```
 
-Il ne doit pas inventer une version Kubernetes, une plateforme de déploiement ou une procédure ATOS.
+Il ne doit pas inventer une version Kubernetes, une plateforme de déploiement ou une procédure CGI.
 
 ## Vérifiez-vous
 
@@ -665,7 +661,7 @@ Les nouveaux documents sont retrouvés et utilisés dans les réponses.
 
 ## Objectif
 
-Documenter le comportement de DevAssist ATOS pour qu’un autre développeur puisse le maintenir.
+Documenter le comportement de DevAssist CGI pour qu’un autre développeur puisse le maintenir.
 
 ## Tâches à faire
 
@@ -689,8 +685,8 @@ Complétez ce tableau :
 
 | Élément | Recommandation |
 |---|---|
-| Nom de l’assistant | DevAssist ATOS — OrionPay |
-| Utilisateurs cibles | Développeurs juniors de l’équipe OrionPay |
+| Nom de l’assistant | DevAssist CGI — OrionPay |
+| Utilisateurs cibles | Développeurs  de l’équipe OrionPay |
 | Documents autorisés | README, guides de contribution, ADR validés, docs API, runbooks validés |
 | Documents interdits | Secrets, `.env`, exports de production, données clients, logs bruts, code non autorisé |
 | Taille de chunk initiale | 500 à 700 caractères, à tester selon le corpus |
