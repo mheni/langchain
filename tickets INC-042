@@ -1,7 +1,7 @@
 # Ticket INC-042 — Erreur lors de la création d’une commande
 
 ## Contexte
-Projet : OrionPay — application fictive du TP ATOS.
+Projet : OrionPay — application fictive du TP CGI.
 Environnement : recette.
 Stack : Java 17, Spring Boot 3, PostgreSQL 16.
 Module concerné : OrderService.
