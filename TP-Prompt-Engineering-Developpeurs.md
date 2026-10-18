@@ -1,6 +1,6 @@
-# TP — Maîtriser le prompt engineering pour les développeurs juniors ATOS
+# TP — Maîtriser le prompt engineering pour les développeurs 
 
-> **Parcours IA pour développeurs juniors ATOS**  
+
 > **Durée :** 1 h 30 à 2 h  
 > **Niveau :** débutant Python / API IA / assistants de code  
 > **Prérequis :** TP « Fondamentaux LLM : tokens, température, hallucinations et mémoire »  
@@ -50,7 +50,7 @@ Dans ce TP, vous allez aider l’équipe fictive **OrionPay** à automatiser une
 
 ## 4. Contexte métier : OrionPay
 
-L’équipe ATOS maintient **OrionPay**, une application fictive de paiement basée sur Java 17, Spring Boot 3 et PostgreSQL 16.
+L’équipe CGI maintient **OrionPay**, une application fictive de paiement basée sur Java 17, Spring Boot 3 et PostgreSQL 16.
 
 Les développeurs reçoivent de nombreux tickets. Certains peuvent être clôturés automatiquement avec une réponse standard. D’autres doivent être envoyés à un développeur senior ou à l’équipe sécurité.
 
@@ -128,7 +128,7 @@ Un prompt vague laisse le modèle deviner trop de choses. RCIFC évite ce probl�
 
 | Élément | Question à se poser | Exemple OrionPay |
 |---|---|---|
-| **R — Rôle** | Qui doit répondre ? | Tu es un ingénieur support senior ATOS. |
+| **R — Rôle** | Qui doit répondre ? | Tu es un ingénieur support senior CGI. |
 | **C — Contexte** | Dans quel projet et quelle situation ? | OrionPay, Java 17, tickets de support applicatif. |
 | **I — Instruction** | Que doit faire le modèle ? | Décide entre clôture et escalade. |
 | **F — Format** | Sous quelle forme répondre ? | Réponds avec un JSON précis. |
@@ -149,7 +149,7 @@ Est-ce que je peux fermer ce ticket ?
 ### Prompt structuré
 
 ```text
-Tu es un ingénieur support senior ATOS.
+Tu es un ingénieur support senior CGI.
 
 Contexte : OrionPay est une application Java 17 et Spring Boot 3.
 
@@ -352,7 +352,7 @@ Le modèle doit répondre avec les conditions observées, une décision et une j
 
 ```python
 prompt_json = """
-Tu es un ingénieur support senior ATOS.
+Tu es un ingénieur support senior CGI.
 
 Règle OrionPay : un ticket peut être clôturé automatiquement si :
 1. Une solution documentée existe.
@@ -516,7 +516,7 @@ Chaque technique a une utilité différente. Il ne faut pas utiliser des exemple
 
 Complétez ce tableau :
 
-| Technique | Quand l’utiliser dans un projet ATOS ? | Avantage | Limite |
+| Technique | Quand l’utiliser dans un projet CGI ? | Avantage | Limite |
 |---|---|---|---|
 | Zero-shot |  |  |  |
 | Few-shot |  |  |  |
@@ -525,7 +525,7 @@ Complétez ce tableau :
 
 ## Corrigé de référence
 
-| Technique | Quand l’utiliser dans un projet ATOS ? | Avantage | Limite |
+| Technique | Quand l’utiliser dans un projet CGI ? | Avantage | Limite |
 |---|---|---|---|
 | Zero-shot | Explication simple d’une erreur ou résumé court | Rapide, prompt court | Format moins prévisible |
 | Few-shot | Commentaires de pull request, classification avec libellés fixes | Format et vocabulaire plus réguliers | Exemples à maintenir |
