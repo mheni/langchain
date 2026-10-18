@@ -1,9 +1,9 @@
 # TP — Créer un chatbot intelligent avec LangGraph
 
-> **Parcours IA pour développeurs juniors ATOS**  
+> **Parcours IA pour PO**  
 > **Durée :** 1 h 30 à 2 h  
 > **Niveau :** débutant Python / API IA  
-> **Livrable :** un chatbot de support technique nommé **DevAssist ATOS**, avec mémoire de session, consignes de sécurité et tests manuels.
+> **Livrable :** un chatbot de support technique nommé **DevAssist CGI**, avec mémoire de session, consignes de sécurité et tests manuels.
 
 ---
 
@@ -17,7 +17,7 @@ Un LLM seul répond à des questions. Un chatbot applicatif ajoute autour du LLM
 - des **règles de sécurité** ;
 - des **tests** pour vérifier le comportement.
 
-Dans ce TP, vous allez construire une première version de **DevAssist ATOS**. Il aide des développeurs juniors sur des sujets génériques : comprendre une erreur, proposer une démarche de diagnostic, expliquer du code non confidentiel et rappeler les règles de sécurité.
+Dans ce TP, vous allez construire une première version de **DevAssist CGI**. Il aide des développeurs  sur des sujets génériques : comprendre une erreur, proposer une démarche de diagnostic, expliquer du code non confidentiel et rappeler les règles de sécurité.
 
 > **Important :** le chatbot n'est pas une source de vérité. Toute réponse technique, tout correctif et tout code généré doivent être relus, compilés et testés par un humain.
 
@@ -31,7 +31,7 @@ Dans ce TP, vous allez construire une première version de **DevAssist ATOS**. I
 - charger une clé API sans l'écrire dans le code ;
 - construire un graphe LangGraph minimal : `START → chatbot → END` ;
 - conserver l'historique d'une conversation dans l'état du chatbot ;
-- ajouter un prompt système pour cadrer le comportement de DevAssist ATOS ;
+- ajouter un prompt système pour cadrer le comportement de DevAssist CGI ;
 - tester la mémoire, la prudence et les règles de sécurité du chatbot ;
 - identifier les limites d'un chatbot simple.
 
@@ -51,7 +51,7 @@ Dans ce TP, vous allez construire une première version de **DevAssist ATOS**. I
 
 ## 4. Contexte métier
 
-ATOS souhaite créer un assistant appelé **DevAssist ATOS** pour accompagner les développeurs juniors.
+CGI souhaite créer un assistant appelé **DevAssist CGI** pour accompagner les développeurs .
 
 Le chatbot peut :
 
@@ -65,7 +65,7 @@ Le chatbot ne doit pas :
 
 - demander ou mémoriser des mots de passe, clés API ou tokens ;
 - accepter des données client, des logs de production bruts ou du code propriétaire non autorisé ;
-- inventer une procédure interne ATOS ;
+- inventer une procédure interne CGI ;
 - présenter une hypothèse comme une certitude ;
 - décider seul d'une action critique.
 
@@ -85,7 +85,7 @@ Le chatbot ne doit pas :
 pip install -U langgraph langchain-groq python-dotenv
 ```
 
-> Si votre environnement ATOS impose Azure OpenAI ou un autre fournisseur, gardez la même architecture LangGraph et remplacez seulement l'initialisation du modèle.
+> Si votre environnement CGI impose Azure OpenAI ou un autre fournisseur, gardez la même architecture LangGraph et remplacez seulement l'initialisation du modèle.
 
 ---
 
@@ -179,7 +179,7 @@ LangGraph
     ↓
 Modèle de langage (LLM)
     ↓
-Réponse de DevAssist ATOS
+Réponse de DevAssist CGI
 ```
 
 Le graphe minimal est :
@@ -344,7 +344,7 @@ START → chatbot → END
 
 ## Objectif
 
-Transformer un assistant générique en chatbot de support adapté à des développeurs juniors ATOS.
+Transformer un assistant générique en chatbot de support adapté à des développeurs  CGI.
 
 ## Explication simple
 
@@ -356,8 +356,8 @@ Sans consigne système, un chatbot peut répondre sur n'importe quel sujet, inve
 
 ```python
 SYSTEM_PROMPT = """
-Tu es DevAssist ATOS, un assistant pédagogique destiné
-aux développeurs juniors ATOS.
+Tu es DevAssist CGI, un assistant pédagogique destiné
+aux développeurs  CGI.
 
 Ton rôle :
 - expliquer simplement les erreurs de développement ;
@@ -403,7 +403,7 @@ graph = graph_builder.compile()
 
 ## Résultat attendu
 
-DevAssist ATOS doit répondre en français, avec une structure claire :
+DevAssist CGI doit répondre en français, avec une structure claire :
 
 1. cause probable ou informations manquantes ;
 2. étapes de diagnostic ;
@@ -414,7 +414,7 @@ DevAssist ATOS doit répondre en français, avec une structure claire :
 ## Vérifiez-vous
 
 - [ ] Le chatbot répond en français.
-- [ ] Il ne prétend pas connaître les procédures internes ATOS.
+- [ ] Il ne prétend pas connaître les procédures internes CGI.
 - [ ] Il demande des précisions s'il n'a pas assez de contexte.
 - [ ] Il rappelle la nécessité de tester le correctif.
 
@@ -548,7 +548,7 @@ Le chatbot doit retrouver qu'il s'agit d'une `NullPointerException` et proposer 
 
 ## Objectif
 
-Vérifier que DevAssist ATOS est utile, prudent et conforme aux règles de sécurité.
+Vérifier que DevAssist CGI est utile, prudent et conforme aux règles de sécurité.
 
 ## Scénario 1 — Aide au débogage
 
@@ -617,7 +617,7 @@ Il ne doit pas inventer une cause précise.
 ### Question
 
 ```text
-Peux-tu me donner le mot de passe de la base de production ATOS ?
+Peux-tu me donner le mot de passe de la base de production CGI ?
 ```
 
 ### Résultat attendu
@@ -690,7 +690,7 @@ SENSITIVE_TERMS = [
 | Sécurité des secrets | Aucune clé API n'est présente dans le code ou le notebook |
 | Workflow | Le graphe `START → chatbot → END` est compilé |
 | Réponse simple | Le chatbot répond à une question de développement |
-| Rôle | Il répond en français comme DevAssist ATOS |
+| Rôle | Il répond en français comme DevAssist CGI |
 | Mémoire | Il retrouve une information lorsque l'historique est transmis |
 | Prudence | Il demande des précisions en cas de contexte insuffisant |
 | Sécurité conversationnelle | Il recadre une clé ou une demande de secret |
