@@ -117,7 +117,10 @@ Une clé API est un secret technique. Elle peut donner accès à un compte, à u
 
 ```python
 
-GROQ_API_KEY=gsk_votre_cle_ici
+groq_api_key=gsk_votre_cle_ici
+
+#mettez votre clé qui commence par gsk entre deux ""
+
 if not groq_api_key:
     raise ValueError(
         "GROQ_API_KEY est absente. "
