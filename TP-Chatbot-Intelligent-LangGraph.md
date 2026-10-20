@@ -136,12 +136,6 @@ print("Clé API détectée :", bool(groq_api_key))
 Clé API détectée : True
 ```
 
-## Vérifiez-vous
-
-- [ ] La clé n'apparaît dans aucune cellule du notebook.
-- [ ] Le fichier `.env` est bien présent dans `.gitignore`.
-- [ ] Vous n'avez pas affiché la valeur de la clé avec `print(groq_api_key)`.
-
 ---
 
 # Étape 1 — Comprendre l'architecture du chatbot
