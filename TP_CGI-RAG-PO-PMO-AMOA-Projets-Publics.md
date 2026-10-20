@@ -150,41 +150,36 @@ Le support conserve les composants du TP initial. La chaîne est assemblée expl
 Avant la séance, tester l’ensemble dans un environnement isolé, puis conserver les versions réellement validées pour les participants. Les commandes d’installation ne remplacent pas ce test de compatibilité.
 
 ### 6.2. Secrets et configuration
-
-Fichier `.env` :
-
-```text
-GROQ_API_KEY=gsk_votre_cle_ici
-GROQ_MODEL=llama-3.3-70b-versatile
-```
-
-Le modèle génératif est repris du TP initial. Vérifier sa disponibilité sur le compte utilisé et adapter `GROQ_MODEL` si nécessaire.
-
-Fichier `.gitignore` :
-
-```gitignore
-.env
-.venv/
-__pycache__/
-.ipynb_checkpoints/
-faiss_index/
-```
-
-Code commun à exécuter :
-
 ```python
 import os
-import re
-from pathlib import Path
+import json
+from collections import Counter
 from dotenv import load_dotenv
+from groq import Groq
 
-load_dotenv()
-if not os.getenv("GROQ_API_KEY"):
-    raise ValueError("Ajoutez GROQ_API_KEY dans .env, jamais dans le code.")
+groq_api_key="gsk_VOTRE CLE API"
 
-MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
-CORPUS_PATH = Path("servicescitoyens_docs.txt")
+if not groq_api_key:
+    raise ValueError(
+        "GROQ_API_KEY est absente. "
+        "Ajoutez-la dans .env, jamais directement dans le code."
+    )
+
+print("Clé API détectée :", bool(groq_api_key))
+client = Groq(api_key=groq_api_key)
+MODEL = "openai/gpt-oss-20b"
+
+
+def ask_llm(messages, temperature=0):
+    """Interroge le modèle et renvoie uniquement le texte de réponse."""
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=messages,
+        temperature=temperature,
+    )
+    return response.choices[0].message.content or ""
 ```
+
 
 ### 6.3. Local ne signifie pas entièrement local
 
@@ -257,6 +252,12 @@ Les clés API, mots de passe, dossiers d’usagers, données personnelles réell
 Une suppression des noms ne suffit pas à garantir l’anonymisation d’un document.
 En usage réel, faire valider le corpus, le service utilisé, les accès et les règles de conservation par les responsables compétents.
 Le modèle reçoit les passages sélectionnés : le caractère local de l’index ne rend pas toute la chaîne locale.
+```
+charger votre fichier dans les contents de GOOGLE COLAB puis dans une cellule executer 
+Code commun à exécuter :
+
+```python
+CORPUS_PATH = "/content/sample_data/servicescitoyens_docs.txt"
 ```
 
 ## Résultat attendu
