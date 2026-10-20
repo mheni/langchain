@@ -86,7 +86,9 @@ La température change le degré de variété dans les réponses. Nous allons do
 ## Tâches à faire
 
 ```python
-groq_api_key="gsk_ COLLER VOTRE CLE"
+from groq import Groq
+
+groq_api_key="gsk_VOTRE CLE ICI"
 
 if not groq_api_key:
     raise ValueError(
@@ -95,7 +97,7 @@ if not groq_api_key:
     )
 
 print("Clé API détectée :", bool(groq_api_key))
-client = Groq(api_key=api_key)
+client = Groq(api_key=groq_api_key)
 MODEL = "llama-3.3-70b-versatile"
 
 
