@@ -119,29 +119,6 @@ Pour R3, « aucun impact identifié » signifie une qualification préalable fou
 
 Le formateur peut fournir un notebook préparé ou un fichier Python. Le participant modifie surtout les textes des prompts et les données fictives.
 
-### 4.1. Installation
-
-```bash
-pip install -U groq python-dotenv
-```
-
-Créez un fichier `.env` :
-
-```text
-GROQ_API_KEY=gsk_votre_cle_ici
-GROQ_MODEL=llama-3.3-70b-versatile
-```
-
-Le modèle ci-dessus est repris du support initial. Avant la séance, le formateur doit vérifier sa disponibilité dans l’environnement Groq utilisé et adapter `GROQ_MODEL` si nécessaire.
-
-Ne transmettez pas le fichier `.env`. Si vous utilisez Git, ajoutez au `.gitignore` :
-
-```text
-.env
-.venv/
-__pycache__/
-```
-
 ### 4.2. Code commun — à exécuter une seule fois
 
 ```python
@@ -151,18 +128,24 @@ from collections import Counter
 from dotenv import load_dotenv
 from groq import Groq
 
-load_dotenv()
-api_key = os.getenv("GROQ_API_KEY")
-if not api_key:
-    raise ValueError("Ajoutez GROQ_API_KEY dans .env, jamais dans le code.")
+groq_api_key="gsk_Votre CLE ICI"
 
-client = Groq(api_key=api_key)
-MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+if not groq_api_key:
+    raise ValueError(
+        "GROQ_API_KEY est absente. "
+        "Ajoutez-la dans .env, jamais directement dans le code."
+    )
 
-def ask_llm(prompt: str, temperature: float = 0) -> str:
+print("Clé API détectée :", bool(groq_api_key))
+client = Groq(api_key=groq_api_key)
+MODEL = "openai/gpt-oss-20b"
+
+
+def ask_llm(messages, temperature=0):
+    """Interroge le modèle et renvoie uniquement le texte de réponse."""
     response = client.chat.completions.create(
         model=MODEL,
-        messages=[{"role": "user", "content": prompt}],
+        messages=messages,
         temperature=temperature,
     )
     return response.choices[0].message.content or ""
