@@ -406,46 +406,7 @@ Proposition à valider par l’autorité habilitée.
 - [ ] La sortie prépare une orientation, pas une validation administrative.
 
 ---
-# TP Prompt Engineering — Étapes 3 à 8 mises à jour
 
-> Public : PO, PMO, AMOA et chefs de projet du secteur public.  
-> Projet fictif : ServicesCitoyens.  
-> Utilisation : remplacer les étapes 3 à 8 du TP par les sections ci-dessous, à la suite de l’étape 2 corrigée.  
-> Environnement conservé : Python, Groq, fichier `.env`.  
-> Tous les cas, seuils et règles sont pédagogiques et fictifs.
-
-## Avant de poursuivre
-
-Exécutez le code commun du TP puis l’étape 2 corrigée. Les éléments suivants doivent exister :
-
-- `client` : client Groq initialisé à partir de `.env` ;
-- `MODEL` : modèle configuré et disponible sur votre compte ;
-- `ask_llm(prompt, temperature=0)` : fonction corrigée utilisant une liste `messages` ;
-- `REGLES` : règles R1 à R5 du TP ;
-- `CAS_REFERENCE` : cas D-101 ;
-- `serialiser(cas)` : fonction de conversion en texte JSON.
-
-Vérifiez les prérequis :
-
-```python
-import json
-from pathlib import Path
-from collections import Counter
-
-requis = ["client", "MODEL", "ask_llm", "REGLES", "CAS_REFERENCE", "serialiser"]
-absents = [nom for nom in requis if nom not in globals()]
-if absents:
-    raise RuntimeError(
-        "Exécutez le code commun et l’étape 2 corrigée. Éléments absents : "
-        + ", ".join(absents)
-    )
-```
-
-Les étapes s’exécutent dans l’ordre. Après avoir changé une fonction ou une variable dans un notebook, réexécutez la cellule concernée avant les cellules qui l’utilisent.
-
-Le paramètre API `messages` doit rester une liste de messages ; les formats tableau ou JSON ci-dessous concernent la réponse demandée au modèle, pas le type du paramètre `messages`.
-
----
 
 # Étape 3 — Utiliser le few-shot pour guider la réponse
 
