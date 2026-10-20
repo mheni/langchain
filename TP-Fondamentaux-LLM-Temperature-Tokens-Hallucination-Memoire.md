@@ -98,7 +98,7 @@ if not groq_api_key:
 
 print("Clé API détectée :", bool(groq_api_key))
 client = Groq(api_key=groq_api_key)
-MODEL = "llama-3.3-70b-versatile"
+MODEL = "openai/gpt-oss-20b"
 
 
 def ask_llm(messages, temperature=0):
