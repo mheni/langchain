@@ -113,30 +113,11 @@ Une clé API est un secret technique. Elle peut donner accès à un compte, à u
 !pip install -U langgraph langchain-groq python-dotenv
 ```
 
-2. Créer un fichier `.env` dans le répertoire du projet :
-
-```text
-GROQ_API_KEY=gsk_votre_cle_ici
-```
-
-3. Ajouter ce fichier à `.gitignore` :
-
-```gitignore
-.env
-__pycache__/
-.ipynb_checkpoints/
-```
-
-4. Charger la clé dans Python :
+2. Charger la clé dans Python :
 
 ```python
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
-
-groq_api_key = os.getenv("GROQ_API_KEY")
-
+GROQ_API_KEY=gsk_votre_cle_ici
 if not groq_api_key:
     raise ValueError(
         "GROQ_API_KEY est absente. "
