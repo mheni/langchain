@@ -70,32 +70,7 @@ Cette bibliothèque n’existe pas. Si le modèle prétend connaître ses classe
 ---
 
 ## 5. Prérequis techniques
-
-- Python 3.10 ou supérieur ;
-- une clé API dans une sandbox autorisée ;
-- le fichier `.env` configuré ;
-- aucun secret dans le notebook ou dans Git.
-
-Installez les dépendances si nécessaire :
-
-```bash
-pip install -U groq python-dotenv
-```
-
-Créez un fichier `.env` :
-
-```text
-GROQ_API_KEY=gsk_votre_cle_ici
-```
-
-Ajoutez-le à `.gitignore` :
-
-```gitignore
-.env
-__pycache__/
-.ipynb_checkpoints/
-```
-
+garder les installations de TP1 et aussi le grok_api_key, copier directement ces deux cellules
 ---
 
 # Étape 0 — Préparer le code commun
@@ -111,20 +86,15 @@ La température change le degré de variété dans les réponses. Nous allons do
 ## Tâches à faire
 
 ```python
-import os
-from dotenv import load_dotenv
-from groq import Groq
+groq_api_key="gsk_ COLLER VOTRE CLE"
 
-load_dotenv()
-
-api_key = os.getenv("GROQ_API_KEY")
-
-if not api_key:
+if not groq_api_key:
     raise ValueError(
         "GROQ_API_KEY est absente. "
-        "Ajoutez-la dans .env, jamais dans le code."
+        "Ajoutez-la dans .env, jamais directement dans le code."
     )
 
+print("Clé API détectée :", bool(groq_api_key))
 client = Groq(api_key=api_key)
 MODEL = "llama-3.3-70b-versatile"
 
@@ -145,7 +115,6 @@ La cellule s’exécute sans afficher la clé API.
 
 ## Vérifiez-vous
 
-- [ ] La clé API est dans `.env`, pas dans le notebook.
 - [ ] `MODEL` contient le nom du modèle autorisé dans votre sandbox.
 - [ ] La fonction `ask_llm()` accepte une liste de messages et une température.
 
