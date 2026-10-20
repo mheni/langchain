@@ -70,43 +70,24 @@ Un ticket peut être clôturé automatiquement si TOUTES les conditions suivante
 ---
 
 ## 5. Prérequis techniques
+groq_api_key="gsk_VOTRE CLE ICI"
 
-Réutilisez l’environnement du TP précédent :
-
-```bash
-pip install -U groq python-dotenv
-```
-
-Votre fichier `.env` :
-
-```text
-GROQ_API_KEY=gsk_votre_cle_ici
-```
-
-Code commun :
-
-```python
-import os
-from dotenv import load_dotenv
-from groq import Groq
-
-load_dotenv()
-
-api_key = os.getenv("GROQ_API_KEY")
-if not api_key:
+if not groq_api_key:
     raise ValueError(
         "GROQ_API_KEY est absente. "
-        "Ajoutez-la dans .env, jamais dans le code."
+        "Ajoutez-la dans .env, jamais directement dans le code."
     )
 
-client = Groq(api_key=api_key)
-MODEL = "llama-3.3-70b-versatile"
+print("Clé API détectée :", bool(groq_api_key))
+client = Groq(api_key=groq_api_key)
+MODEL = "openai/gpt-oss-20b"
 
 
-def ask_llm(prompt: str, temperature: float = 0) -> str:
+def ask_llm(messages, temperature=0):
+    """Interroge le modèle et renvoie uniquement le texte de réponse."""
     response = client.chat.completions.create(
         model=MODEL,
-        messages=[{"role": "user", "content": prompt}],
+        messages=messages,
         temperature=temperature,
     )
     return response.choices[0].message.content
