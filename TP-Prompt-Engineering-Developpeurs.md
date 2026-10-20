@@ -70,6 +70,7 @@ Un ticket peut être clôturé automatiquement si TOUTES les conditions suivante
 ---
 
 ## 5. Prérequis techniques
+```text
 groq_api_key="gsk_VOTRE CLE ICI"
 
 if not groq_api_key:
