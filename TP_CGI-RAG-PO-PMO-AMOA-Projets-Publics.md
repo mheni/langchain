@@ -153,6 +153,7 @@ Avant la séance, tester l’ensemble dans un environnement isolé, puis conserv
 ```python
 import os
 import json
+import re
 from collections import Counter
 from dotenv import load_dotenv
 from groq import Groq
