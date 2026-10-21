@@ -443,11 +443,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableLambda
 
-llm = ChatGroq(
-    model=MODEL,
-    temperature=0,
-    max_retries=2,
-)
+llm = ChatGroq(model=MODEL,temperature=0,max_retries=2,api_key=groq_api_key)
 
 REPLI = "Je ne dispose pas de cette information dans la documentation ServicesCitoyens fournie."
 
